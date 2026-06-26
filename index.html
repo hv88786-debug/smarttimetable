@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SmartTimetable — Smarter Scheduling for Modern Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f8fafb;color:#1a202c;font-size:15px;line-height:1.6;min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* ── NAVBAR ── */
+.navbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:58px;background:#fff;
+  border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100
+}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:#0f766e}
+.logo-icon{width:28px;height:28px;background:#0f766e;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:13px;height:13px}
+.nav-right{display:flex;gap:8px}
+.btn-continue{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid #d1d5db;padding:7px 16px;
+  border-radius:6px;font-size:13px;font-weight:500;color:#374151;
+  cursor:pointer;font-family:inherit;transition:border-color .15s,color .15s
+}
+.btn-continue:hover{border-color:#0f766e;color:#0f766e}
+.btn-continue .mini-avatar{
+  width:22px;height:22px;border-radius:50%;background:#0f766e;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:#fff;flex-shrink:0
+}
+
+/* ── HERO ── */
+.hero{
+  display:flex;align-items:center;justify-content:center;
+  min-height:calc(100vh - 58px - 53px);
+  padding:60px 48px;
+  background:#fff;
+  border-bottom:1px solid #e2e8f0
+}
+.hero-inner{max-width:560px;text-align:center}
+.hero-inner h1{font-size:36px;font-weight:700;color:#0f172a;line-height:1.22;margin-bottom:8px}
+.hero-inner .hero-subtitle{font-size:18px;font-weight:600;color:#0f766e;margin-bottom:14px}
+.hero-inner p{
+  font-size:15px;color:#64748b;line-height:1.75;
+  margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto
+}
+.hero-actions{display:flex;gap:12px;justify-content:center}
+.btn-lg{
+  padding:11px 26px;border-radius:7px;font-size:14px;
+  font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s
+}
+.btn-lg.primary{
+  background:#0f766e;border:none;color:#fff;
+  display:flex;align-items:center;gap:8px
+}
+.btn-lg.primary:hover{background:#0d6460}
+.btn-lg.primary .mini-avatar-lg{
+  width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff
+}
+
+/* ── FOOTER ── */
+footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 48px;background:#fff;border-top:1px solid #e2e8f0;
+  font-size:12px;color:#94a3b8
+}
+.footer-logo{display:flex;align-items:center;gap:7px;font-weight:700;font-size:13px;color:#0f766e}
+.footer-logo-icon{width:20px;height:20px;background:#0f766e;border-radius:4px;display:flex;align-items:center;justify-content:center}
+
+/* ── LOGIN MODAL ── */
+.login-modal-bg{
+  display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);
+  z-index:400;align-items:center;justify-content:center;
+  backdrop-filter:blur(2px)
+}
+.login-modal-bg.open{display:flex}
+.login-modal{
+  background:#fff;border-radius:14px;padding:32px 28px;width:360px;
+  box-shadow:0 20px 60px rgba(0,0,0,.18);
+  animation:modalIn .2s ease
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:none}}
+.lm-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#0f766e;margin-bottom:20px}
+.lm-heading{font-size:16px;font-weight:700;color:#0f172a;margin-bottom:4px}
+.lm-sub{font-size:12.5px;color:#64748b;margin-bottom:20px}
+.lm-divider{height:1px;background:#f1f5f9;margin-bottom:20px}
+
+/* Google-style account card */
+.account-card{
+  border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:border-color .15s,background .15s;margin-bottom:16px
+}
+.account-card:hover{border-color:#0f766e;background:#f8fffd}
+.account-avatar{
+  width:42px;height:42px;border-radius:50%;background:#0f766e;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;color:#fff;flex-shrink:0
+}
+.account-info{flex:1}
+.account-name{font-size:14px;font-weight:600;color:#0f172a}
+.account-email{font-size:12px;color:#64748b;margin-top:2px}
+.account-role{
+  display:inline-block;font-size:10.5px;font-weight:600;
+  background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;
+  padding:2px 8px;border-radius:20px;margin-top:5px
+}
+.account-check{color:#0f766e;font-size:16px;flex-shrink:0}
+.lm-actions{display:flex;gap:8px;justify-content:flex-end}
+.lm-btn-cancel{
+  background:#fff;border:1px solid #e2e8f0;padding:8px 18px;
+  border-radius:7px;font-size:13px;font-weight:500;color:#64748b;
+  cursor:pointer;font-family:inherit;transition:border-color .15s
+}
+.lm-btn-cancel:hover{border-color:#94a3b8}
+.lm-btn-continue{
+  background:#0f766e;border:none;padding:8px 22px;
+  border-radius:7px;font-size:13px;font-weight:600;color:#fff;
+  cursor:pointer;font-family:inherit;transition:background .15s
+}
+.lm-btn-continue:hover{background:#0d6460}
+.lm-footer-note{font-size:11px;color:#94a3b8;text-align:center;margin-top:14px}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);
+  background:#1e293b;color:#fff;padding:10px 20px;border-radius:8px;
+  font-size:13px;font-weight:500;z-index:500;opacity:0;
+  transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     LANDING PAGE
+══════════════════════════════════ -->
+<div id="landing">
+
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 13 13" fill="none" stroke="#fff" stroke-width="2.1">
+          <rect x=".8" y=".8" width="4.2" height="4.2" rx="1"/>
+          <rect x="8" y=".8" width="4.2" height="4.2" rx="1"/>
+          <rect x=".8" y="8" width="4.2" height="4.2" rx="1"/>
+          <rect x="8" y="8" width="4.2" height="4.2" rx="1"/>
+        </svg>
+      </div>
+      SmartTimetable
+    </div>
+    <div class="nav-right">
+      <button class="btn-continue" id="navContinueBtn" onclick="openLoginModal()">
+        <div class="mini-avatar">HK</div>
+        <span>Continue as Harish Kumar</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>SmartTimetable</h1>
+      <div class="hero-subtitle">Smarter Scheduling for Modern Education</div>
+      <p>Make your schedules organized, conflict-free, and easier to manage — for every teacher, class, and section.</p>
+      <div class="hero-actions">
+        <button class="btn-lg primary" onclick="openLoginModal()">
+          <div class="mini-avatar-lg">HK</div>
+          Continue as Harish Kumar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">
+      <div class="footer-logo-icon">
+        <svg viewBox="0 0 13 13" fill="none" stroke="#fff" stroke-width="2.1" style="width:11px;height:11px">
+          <rect x=".8" y=".8" width="4.2" height="4.2" rx="1"/>
+          <rect x="8" y=".8" width="4.2" height="4.2" rx="1"/>
+          <rect x=".8" y="8" width="4.2" height="4.2" rx="1"/>
+          <rect x="8" y="8" width="4.2" height="4.2" rx="1"/>
+        </svg>
+      </div>
+      SmartTimetable
+    </div>
+    <div>30 Days 30 SIH Solutions &nbsp;·&nbsp; Day 10</div>
+  </footer>
+
+</div><!-- /landing -->
+
+<!-- ══════════════════════════════════
+     LOGIN MODAL
+══════════════════════════════════ -->
+<div class="login-modal-bg" id="loginModal" onclick="handleLoginBgClick(event)">
+  <div class="login-modal" onclick="event.stopPropagation()">
+    <div class="lm-logo">
+      <div class="logo-icon" style="width:24px;height:24px">
+        <svg viewBox="0 0 13 13" fill="none" stroke="#fff" stroke-width="2.1" style="width:11px;height:11px">
+          <rect x=".8" y=".8" width="4.2" height="4.2" rx="1"/>
+          <rect x="8" y=".8" width="4.2" height="4.2" rx="1"/>
+          <rect x=".8" y="8" width="4.2" height="4.2" rx="1"/>
+          <rect x="8" y="8" width="4.2" height="4.2" rx="1"/>
+        </svg>
+      </div>
+      SmartTimetable
+    </div>
+    <div class="lm-heading">Sign in to continue</div>
+    <div class="lm-sub">Harish Kumar · Administrator Demo Account</div>
+    <div class="lm-divider"></div>
+
+    <div class="account-card" onclick="selectAccount()">
+      <div class="account-avatar">HK</div>
+      <div class="account-info">
+        <div class="account-name">👤 Harish Kumar</div>
+        <div class="account-email">📧 harish.demo@smarttimetable.com</div>
+        <div class="account-role">Administrator</div>
+      </div>
+      <div class="account-check">✓</div>
+    </div>
+
+    <div class="lm-actions">
+      <button class="lm-btn-cancel" onclick="closeLoginModal()">Cancel</button>
+      <button class="lm-btn-continue" onclick="doLogin()">Continue</button>
+    </div>
+    <div class="lm-footer-note">By continuing, you agree to SmartTimetable's terms of use.</div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ── SESSION ──
+     Shared session contract with the dashboard page:
+     localStorage key 'st_session_harish' present = signed in. */
+  var SESSION_KEY = 'st_session_harish';
+
+  function hasSession() {
+    try { return !!localStorage.getItem(SESSION_KEY); } catch(e){ return false; }
+  }
+  function saveSession() {
+    try { localStorage.setItem(SESSION_KEY, JSON.stringify({user:'Harish Kumar',email:'harish.demo@smarttimetable.com',role:'Administrator',ts:Date.now()})); } catch(e){}
+  }
+
+  /* ── TOAST ── */
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 3000);
+  }
+
+  /* ── LOGIN MODAL ── */
+  function openLoginModal() {
+    document.getElementById('loginModal').classList.add('open');
+  }
+  function closeLoginModal() {
+    document.getElementById('loginModal').classList.remove('open');
+  }
+  function handleLoginBgClick(e) {
+    if (e.target === document.getElementById('loginModal')) closeLoginModal();
+  }
+  function selectAccount() {
+    // visual feedback only – account is pre-selected
+  }
+  function doLogin() {
+    saveSession();
+    closeLoginModal();
+    showToast('👋 Welcome back, Harish!');
+    setTimeout(function(){ window.location.href = 'dashboard.html'; }, 500);
+  }
+
+  /* ── INIT: if a session already exists (e.g. on refresh), skip the
+     landing page and go straight to the dashboard page ── */
+  if (hasSession()) {
+    window.location.replace('dashboard.html');
+  }
+</script>
+</body>
+</html>
